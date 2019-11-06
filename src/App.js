@@ -1,12 +1,12 @@
 import React from "react";
 import Home from "./pages/Home";
+import './styles/main.scss';
 
 const App = () => {
 	return (
-		<div className="App">
-			yoruldum ya
+		<>
 			<Home />
-		</div>
+		</>
 	);
 }
 
