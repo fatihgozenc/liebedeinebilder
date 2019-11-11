@@ -2,7 +2,7 @@ import LRU from "lru-cache";
 import md5 from "md5";
 import produce from "immer";
 
-const cache = new LRU(200);
+const cache = new LRU(250);
 
 const useFetchSuspense = (url, fetchOptions = {}) => {
 	const key = `${url}.${md5(JSON.stringify(fetchOptions))}`;

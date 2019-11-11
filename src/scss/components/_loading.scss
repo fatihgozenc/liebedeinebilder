@@ -1,0 +1,41 @@
+.loading {
+	transition: .5s all;
+	width: 60px;
+	height: 60px;
+	margin: 0 auto;
+	transform-origin: center;
+	animation: 1s turning infinite linear;
+}
+
+@keyframes turning {
+	0% {
+		transform: rotate(0deg);
+	}
+
+	100% {
+		transform: rotate(360deg);
+	}
+}
+
+.loading_frame {
+	position: absolute;
+	z-index: -1;
+	height: 16vh;
+	left: 0;
+	margin: 0 auto;
+	right: 0;
+
+	rect {
+		height: 16vh;
+		stroke-dasharray: 1200 150;
+		stroke-dashoffset: 3500;
+		animation: draw 5s linear infinite;
+	}
+
+}
+
+@keyframes draw {
+	to {
+		stroke-dashoffset: 0
+	}
+}

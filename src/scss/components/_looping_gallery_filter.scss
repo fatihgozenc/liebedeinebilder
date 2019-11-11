@@ -1,0 +1,40 @@
+.looping-gallery-filter {
+	display: flex;
+	justify-content: center;
+	padding: 1.6em 0;
+
+	a {
+		cursor: pointer;
+		font-size: .9em;
+		font-weight: 500;
+		text-transform: uppercase;
+		transition: .3s all;
+		padding: 0 1em;
+		border-right: 1px solid $nutRed;
+
+		@include md {
+			font-size: 1em;
+			letter-spacing: 1.3px;
+		}
+
+		&:first-child {
+			border-left: 1px solid $nutRed;
+		}
+
+		&:hover {
+			transition: .3s all;
+			color: $nutRed;
+		}
+	}
+
+}
+
+.filter {
+	opacity: .1;
+	transition: .5s all;
+	pointer-events: none;
+}
+
+.filter-active {
+	color: $nutRed;
+}

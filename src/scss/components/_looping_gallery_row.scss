@@ -1,4 +1,6 @@
 .looping_gallery_row {
 	display: inline-flex;
 	transition-timing-function: linear;
+	// transition: 10s all linear;
+	-webkit-backface-visibility: hidden;
 }

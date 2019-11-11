@@ -1,6 +1,7 @@
 import React from 'react';
 import useFetchSuspense from '../utils/useFetchSuspense';
-import LoopingRow from './LoopingRow';
+import LoopingGalleryFilter from './LoopingGalleryFilter';
+const LoopingRow = React.lazy(() => import('./LoopingRow'));
 
 const LoopingGallery = () => {
 
@@ -22,14 +23,14 @@ const LoopingGallery = () => {
 		})
 		return slicedData;
 	};
-
 	const loopingRowData = distributeImageData(data, 4);
 
 	return (
 		<div className="looping_gallery">
 			{loopingRowData.map((rowData, key) => (
-				<LoopingRow key={key} data={rowData} />
+				<LoopingRow key={key} number={key} data={rowData} />
 			))}
+			<LoopingGalleryFilter data={data} />
 		</div>
 	)
 };

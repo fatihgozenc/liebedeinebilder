@@ -1,0 +1,38 @@
+.header {
+	display: flex;
+	justify-content: space-between;
+	padding: 1.6rem 5%;
+
+	& *:not(.break) {
+		cursor: pointer;
+	}
+
+	@include xl {
+		padding: 1.6rem 15%;
+	}
+
+	.header-item:not(:first-child) {
+		padding-left: .5em;
+		fill: $nutGray;
+		align-self: center;
+		transition: .5s all;
+
+		&:hover {
+			fill: #fff;
+			transition: .5s all;
+		}
+	}
+
+	.break {
+		width: 10%;
+
+		@include lg {
+			width: 60%;
+		}
+	}
+
+	.logo>div>svg {
+		width: 100%;
+	}
+
+}
