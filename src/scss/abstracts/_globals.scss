@@ -1,5 +1,11 @@
 .loaded {
-	transition: .5s opacity, .5s scale;
-	transform: scale(1);
+	transition: 1.6s all cubic-bezier(.31, .02, .34, .95);
+	// transform: scale(1);
 	opacity: 1;
+}
+
+.as_background {
+	background-position: center;
+	background-size: cover;
+	background-repeat: no-repeat;
 }

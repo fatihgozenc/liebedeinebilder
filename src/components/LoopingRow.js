@@ -1,6 +1,6 @@
 import React from 'react';
+import LoopingItem from './LoopingItem';
 import useCountRenders from '../utils/useCountRenders'
-const LoopingItem = React.lazy(() => import('./LoopingItem'));
 
 const cloneChildren = (el) => {
 	let items = Array.from(el.childNodes);
@@ -10,111 +10,67 @@ const cloneChildren = (el) => {
 	})
 };
 
-// var moving = false,
-// 	el = document.getElementById("mover");
-// el.className = el.className + " move-right";
-// el.addEventListener('transitionend', function () {
-// 	moving = true;
-// });
+const setIntervalAndExecute = (fn, t) => {
+	setTimeout(() => {
+		fn();
+	}, t / t);
+	return (setInterval(fn, t));
+};
 
-// function getPosition() {
-// 	var rect = el.getBoundingClientRect()
-// 	console.log(rect.top, rect.left);
-// 	if (!moving) {
-// 		window.requestAnimationFrame(getPosition);
-// 	}
-// }
-// window.requestAnimationFrame(getPosition);
-
-const LoopingRow = React.memo((props) => {
+const LoopingRow = (props) => {
 
 	const [width, setWidth] = React.useState(0);
-	const [position, setPosition] = React.useState(0)
-	const [transition] = React.useState(180);
-	const [moving, setMoving] = React.useState(true);
+	const [canStart, setCanStart] = React.useState(false);
+	const [transition] = React.useState(150);
 
 	const measure = React.useCallback((n) => {
 		setWidth(c => Math.round((c + n) * 100) / 100)
-		setPosition(c => Math.round((c + n) * 100) / 100)
-	}, [setWidth, setPosition]);
+		setCanStart(true)
+	}, [setWidth]);
 
 	const galleryRow = React.useRef();
 
-	React.useEffect(() => {
-		if (width > 0) {
-			setTimeout(() => { cloneChildren(galleryRow.current) }, 5000)
-		}
-	}, [width])
-
-	// React.useEffect(() => {
-	// 	function getPosition() {
-	// 		var xCoord = Math.floor(galleryRow.current.getBoundingClientRect().x)
-	// 		var originPos = -Math.round(width);
-	// 		if (xCoord < -2 && originPos < -2 && xCoord === originPos) {
-	// 			console.log(xCoord, originPos)
-	// 			setMoving(!moving)
-	// 		}
-	// 		window.requestAnimationFrame(getPosition);
-	// 	}
-	// 	window.requestAnimationFrame(getPosition);
-	// }, [moving, position, width])
-
 	useCountRenders();
 
-	// const loopIt = (e) => {
-	// 	console.log(e.propertyName)
-	// 	if (e.propertyName === "transform") {
-	// 		e.currentTarget.style.transform = `translateX(0)`;
-	// 		e.currentTarget.style.transitionDuration = `0s`;
-	// 		setTimeout(() => {
-	// 			e.persist()
-	// 			galleryRow.current.style.transform = `translateX(-${position}px)`;
-	// 			galleryRow.current.style.transitionDuration = `${transition}s`;
-	// 		}, 1);
-	// 	}
+	React.useEffect(() => {
+		//COMPONENTDIDMOUNT
+		let row = galleryRow.current;
+		console.log(`Row has mounted.`)
 
-	// }
-
-	const loopIt = (e) => {
-		console.log(e)
-		if (e.propertyName === "transform") {
-			e.currentTarget.style.transform = `translateX(0)`;
-			e.currentTarget.style.transitionDuration = `0s`;
-			setTimeout(() => {
-				galleryRow.current.style.transform = `translateX(-${position}px)`;
-				galleryRow.current.style.transitionDuration = `${transition}s`;
-			}, 1);
+		if (canStart && width > 0) {
+			cloneChildren(row)
+			setIntervalAndExecute(() => {
+				console.log('Animation looped on row.')
+				row.style.transitionDuration = `0s`;
+				row.style.transform = `translateX(0px)`;
+				setTimeout(() => {
+					row.style.transitionDuration = `${transition}s`;
+					row.style.transform = `translateX(-${width}px)`;
+				}, 10);
+			}, `${transition}200`);
 		}
 
-	}
-
-	// const getPosition = (e) => {
-	// 		var rect = e.currentTarget.getBoundingClientRect()
-	// 		console.log(rect.top, rect.left);
-	// 		if (!moving) {
-	// 			window.requestAnimationFrame(getPosition);
-	// 		}
-	// 	}
-	// 	window.requestAnimationFrame(getPosition);
-
-	// console.log(props)
+		//COMPONENTWILLUNMOUNT
+		return () => {
+			if (canStart) {
+				localStorage.setItem('shouldBeCloned', 'false')
+				console.log('Row has unmounted')
+				row.style.transitionDuration = `0s`;
+				row.style.transform = `translateX(0px)`;
+			} else {
+				return null
+			}
+		}
+	}, [canStart, transition, width])
 
 	return (
 		<div className="looping_gallery_row"
-			style={{
-				transform: `translateX(-${position}px)`,
-				transitionDuration: `${transition}s`
-			}}
-			onTransitionEnd={(e) => {
-				e.stopPropagation()
-				loopIt(e)
-			}}
-			// onLoad={}
 			ref={galleryRow}>
 			{props.data.map(item => (
 				<LoopingItem
 					measure={measure}
 					key={item.id}
+					slug={item.slug}
 					alt={item.title}
 					category={item.categories}
 					highResUrl={item.image.medium}
@@ -122,6 +78,6 @@ const LoopingRow = React.memo((props) => {
 			))}
 		</div>
 	)
-})
+}
 
 export default LoopingRow;

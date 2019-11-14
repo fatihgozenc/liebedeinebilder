@@ -1,16 +1,27 @@
 import React from 'react';
-import { Helmet } from "react-helmet";
+import Header from './Header';
+import Section from './Section'
+import Footer from './Footer';
+import useFetchSuspense from '../utils/useFetchSuspense';
 
 const Layout = (props) => {
-	return (
-		<section className={`layout layout-${props.name}`}>
-			<Helmet>
-				<meta charSet="utf-8" />
-				<title>{props.name}</title>
-				<link rel="canonical" href={window.location} />
-			</Helmet>
-			{props.children}
-		</section>
 
+	const data = useFetchSuspense(
+		"wordpress/wp-json/ldb/v1/main", { query: {} }
+	);
+
+	return (
+		<>
+			<Header data={data} />
+			<section className="layout">
+				{props.children}
+			</section>
+			<Section data={data} name="personen" />
+			<Section data={data} name="portfolio" />
+			<Section data={data} name="agentur" />
+			<Footer data={data} />
+		</>
 	)
 }
+
+export default Layout;

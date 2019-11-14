@@ -1,15 +1,16 @@
-import React, { Suspense } from 'react';
+import React from 'react';
 import LoopingGallery from '../components/LoopingGallery';
-
-const LoadingData = () => <div>Loading data...</div>
+import useFetchSuspense from '../utils/useFetchSuspense';
 
 const Home = () => {
+
+	const data = useFetchSuspense(
+		"wordpress/wp-json/ldb/v1/posts", { query: {} }
+	);
+
 	return (
 		<>
-			<h1>Home</h1>
-			<Suspense fallback={<LoadingData />}>
-				<LoopingGallery />
-			</Suspense>
+			<LoopingGallery data={data} />
 		</>
 	)
 };

@@ -1,13 +1,8 @@
 import React from 'react';
-import useFetchSuspense from '../utils/useFetchSuspense';
 import LoopingGalleryFilter from './LoopingGalleryFilter';
 const LoopingRow = React.lazy(() => import('./LoopingRow'));
 
-const LoopingGallery = () => {
-
-	const data = useFetchSuspense(
-		"wordpress/wp-json/ldb/v1/posts", { query: {} }
-	);
+const LoopingGallery = ({ data }) => {
 
 	const distributeImageData = (arr, rows) => {
 		const rowImgCount = Math.ceil((arr.length) / rows);
@@ -24,11 +19,11 @@ const LoopingGallery = () => {
 		return slicedData;
 	};
 	const loopingRowData = distributeImageData(data, 4);
-
+	// console.trace(LoopingRow)
 	return (
 		<div className="looping_gallery">
 			{loopingRowData.map((rowData, key) => (
-				<LoopingRow key={key} number={key} data={rowData} />
+				<LoopingRow onLoad={console.log('row loaded')} key={key} number={key} data={rowData} />
 			))}
 			<LoopingGalleryFilter data={data} />
 		</div>

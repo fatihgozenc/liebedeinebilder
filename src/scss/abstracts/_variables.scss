@@ -9,3 +9,9 @@ $loopingImgHeight: 18vh;
 	background-size: contain;
 	background-repeat: no-repeat;
 }
+
+.seo {
+	visibility: hidden;
+	position: absolute;
+	z-index: -5;
+}

@@ -8,3 +8,42 @@ body {
 	color: $nutGray;
 	font-family: 'Montserrat', sans-serif;
 }
+
+
+@include xl {
+	body::-webkit-scrollbar {
+		position: absolute;
+		width: .2vw;
+		background-color: $nutDark;
+	}
+
+	body::-webkit-scrollbar-track {
+		box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+		-webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+	}
+
+	body::-webkit-scrollbar-thumb {
+		border-radius: .5rem;
+		background: linear-gradient(to top, $nutDark, $nutRed);
+	}
+
+}
+
+.layout {
+	min-height: 90vh;
+}
+
+.template {
+	display: flex;
+	flex-direction: column;
+	padding: 5%;
+	align-content: center;
+}
+
+.transition_container {
+	width: 100vw;
+
+	@include xl {
+		width: 99.8vw;
+	}
+}

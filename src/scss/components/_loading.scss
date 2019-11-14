@@ -1,10 +1,39 @@
+.loading_wrapper {
+	height: 100vh;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+
+}
+
+.loading_wrapper>h5 {
+	font-weight: 500;
+	letter-spacing: 9px;
+	animation: 2.6s fadeIn infinite linear;
+}
+
 .loading {
 	transition: .5s all;
-	width: 60px;
-	height: 60px;
+	width: 160px;
+	height: 160px;
 	margin: 0 auto;
 	transform-origin: center;
 	animation: 1s turning infinite linear;
+}
+
+@keyframes strecthing {
+	0% {
+		letter-spacing: 2px;
+	}
+
+	50% {
+		letter-spacing: 12px;
+	}
+
+	100% {
+		letter-spacing: 2px;
+	}
 }
 
 @keyframes turning {
@@ -17,6 +46,8 @@
 	}
 }
 
+
+
 .loading_frame {
 	position: absolute;
 	z-index: -1;
@@ -24,12 +55,13 @@
 	left: 0;
 	margin: 0 auto;
 	right: 0;
+	animation: fadeIn 2s cubic-bezier(.31, .02, .34, .95);
 
 	rect {
 		height: 16vh;
-		stroke-dasharray: 1200 150;
+		stroke-dasharray: 450 250;
 		stroke-dashoffset: 3500;
-		animation: draw 5s linear infinite;
+		animation: draw 20s linear infinite;
 	}
 
 }
@@ -37,5 +69,15 @@
 @keyframes draw {
 	to {
 		stroke-dashoffset: 0
+	}
+}
+
+@keyframes fadeIn {
+	0% {
+		opacity: 0
+	}
+
+	100% {
+		opacity: 1
 	}
 }

@@ -1,7 +1,14 @@
 .looping-gallery-filter {
 	display: flex;
 	justify-content: center;
-	padding: 1.6em 0;
+	position: absolute;
+	bottom: -5%;
+	left: 0;
+	right: 0;
+
+	@include md {
+		bottom: -8%;
+	}
 
 	a {
 		cursor: pointer;
@@ -14,7 +21,12 @@
 
 		@include md {
 			font-size: 1em;
-			letter-spacing: 1.3px;
+			letter-spacing: 2px;
+		}
+
+		@include xl {
+			font-size: .8em;
+			letter-spacing: 2px;
 		}
 
 		&:first-child {

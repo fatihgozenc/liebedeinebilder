@@ -1,10 +1,14 @@
 .header {
 	display: flex;
 	justify-content: space-between;
-	padding: 1.6rem 5%;
+	padding: 1.2rem 5%;
 
 	& *:not(.break) {
 		cursor: pointer;
+	}
+
+	@include sm {
+		padding: .8rem 5%;
 	}
 
 	@include xl {
@@ -31,8 +35,9 @@
 		}
 	}
 
-	.logo>div>svg {
-		width: 100%;
+	.logo {
+		width: 150px;
+		height: 25px;
 	}
 
 }

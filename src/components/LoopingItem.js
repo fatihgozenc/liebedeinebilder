@@ -1,6 +1,8 @@
 import React from 'react';
 import getPxFromUrl from '../lib/getPxFromUrl';
-import LoadingFrame from './LoadingFrame'
+import LoadingFrame from './LoadingFrame';
+// import useCountRenders from '../utils/useCountRenders'
+import { Link } from 'react-router-dom';
 
 const LoopingItem = React.memo((props) => {
 
@@ -14,22 +16,25 @@ const LoopingItem = React.memo((props) => {
 		props.measure(imgDomWidth)
 	}, [imgDomWidth, props]);
 
-	const filterSlug = props.category.filter(cat => cat !== "Best").toString().toLowerCase()
-	const imgHovered = (e) => {
-		e.persist()
-		e.stopPropagation()
-		console.log(e.currentTarget)
-	}
+	const filterSlug = props.category.filter(cat => cat !== "Best").toString()
+
+	// useCountRenders();
+
 	return (
-		<div className="looping_gallery_item"
-			onMouseEnter={imgHovered}
-			category={filterSlug}
-			style={{ width: `${imgDomWidth}px` }}>
-			<LoadingFrame width={imgDomWidth} />
-			<img className="looping_gallery_item-img"
-				src={props.highResUrl}
-				alt={props.alt} />
-		</div>
+		<Link to={`/${props.slug}`}>
+			<div className="looping_gallery_item"
+				category={filterSlug.toLowerCase()}
+				style={{ width: `${imgDomWidth}px` }}>
+				<img className="looping_gallery_item-img"
+					onLoad={(e) => e.currentTarget.classList.add('loaded')}
+					src={props.highResUrl}
+					alt={props.alt} />
+				<LoadingFrame width={imgDomWidth} />
+				<div className="looping_gallery_item-text">
+					<h5>{props.alt}<span>{filterSlug}</span></h5>
+				</div>
+			</div>
+		</Link>
 	)
 });
 

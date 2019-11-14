@@ -53,7 +53,7 @@ const LoopingGalleryFilter = (props) => {
 	const filterItem = (e) => {
 		const slug = e.target.innerText.toLowerCase();
 		let galleryParent = filterRef.current.parentElement;
-		let allItems = galleryParent.querySelectorAll('[category]');
+		// let allItems = galleryParent.querySelectorAll('[category]');
 		let filteredItems = galleryParent.querySelectorAll('.looping_gallery_item:not([category="' + slug + '"])');
 		// const pattern = /\/#([a-z]*)/;
 		// const match = pattern.exec(e.target.href);

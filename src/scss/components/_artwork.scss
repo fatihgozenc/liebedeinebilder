@@ -1,0 +1,40 @@
+.artwork {
+	display: flex;
+	flex-direction: column;
+	padding: 0 5%;
+}
+
+.artwork_group-wrapper {
+	overflow: hidden;
+	height: 70vh;
+	position: relative;
+}
+
+.artwork_switcher {
+	top: 0;
+	position: absolute;
+	display: flex;
+}
+
+.artwork_item {
+	height: 70vh;
+	flex: 1 0 90vw;
+}
+
+.artwork_img {
+	height: 75%;
+	width: 100%;
+}
+
+.other_artwork_list {
+
+	will-change: transform;
+}
+
+.other_artwork {
+	height: 50vh;
+	width: 100%;
+	will-change: transform;
+	position: absolute;
+
+}

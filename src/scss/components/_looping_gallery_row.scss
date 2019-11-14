@@ -2,5 +2,6 @@
 	display: inline-flex;
 	transition-timing-function: linear;
 	// transition: 10s all linear;
+	will-change: transform;
 	-webkit-backface-visibility: hidden;
 }
