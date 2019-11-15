@@ -35,7 +35,7 @@ const ArtworkItem = (props) => {
 	}
 
 	const handleTouchMove = (e) => {
-		console.log(centerX)
+		console.log(centerX, centerY)
 
 		let touch = e.touches[0];
 		let change = startingX - touch.clientX;
@@ -44,9 +44,12 @@ const ArtworkItem = (props) => {
 		if (change < 0) {
 			return
 		}
-
-		e.currentTarget.parentElement.style.left = `-${change}px`;
-
+		let scaleRatio = `0.${1000 - change}`;
+		console.log(e.currentTarget.offsetLeft)
+		e.currentTarget.parentElement.style.transitionDuration = `0ms`;
+		e.currentTarget.parentElement.style.left = `-${e.currentTarget.offsetLeft === 0 ? change : e.currentTarget.offsetLeft + change}px`;
+		e.currentTarget.parentElement.style.transform = `scale(${scaleRatio})`;
+		e.currentTarget.parentElement.style.transformOrigin = `${centerX}px ${centerY}px`;
 		// e.currentTarget.nextElementSibling.display = `block`
 		// e.currentTarget.nextElementSibling.left = `${window.innerWidth - change}px`
 
@@ -56,8 +59,17 @@ const ArtworkItem = (props) => {
 	const handleTouchEnd = (e) => {
 		console.log('touch finished')
 		let change = startingX - e.changedTouches[0].clientX;
-		let threshold = window.width / 3;
-		e.currentTarget.parentElement.style.transform = `translateX(-100%)`
+		let threshold = window.innerWidth / 3;
+		console.log(change, e.currentTarget.offsetWidth, threshold)
+		e.currentTarget.parentElement.style.left = `0px`
+		e.currentTarget.parentElement.style.transform = `scale(1.000)`;
+		// e.currentTarget.parentElement.style.transform = `translateX(-${e.currentTarget.offsetWidth - change}px)`
+		e.currentTarget.parentElement.style.transitionDuration = `500ms`
+
+		if (change > threshold) {
+			e.currentTarget.parentElement.style.transform = `translateX(-${e.currentTarget.offsetWidth}px) scale(1.000)`;
+
+		}
 
 		// if (change < threshold) {
 		// 	e.currentTarget.style.left = 0;

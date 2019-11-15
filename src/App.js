@@ -18,7 +18,6 @@ const App = () => {
 		leave: { opacity: 0, position: `absolute`, transform: `translateY(2%)` }
 	})
 
-
 	return (
 		<>
 			<Suspense fallback={<LoadingData />}>

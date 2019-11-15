@@ -11,12 +11,15 @@
 }
 
 .artwork_switcher {
+
 	top: 0;
 	position: absolute;
 	display: flex;
 }
 
 .artwork_item {
+	box-sizing: border-box;
+	border: 1px solid $nutRed;
 	height: 70vh;
 	flex: 1 0 90vw;
 }
