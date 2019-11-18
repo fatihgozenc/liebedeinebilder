@@ -62,11 +62,13 @@ const LoopingGalleryFilter = (props) => {
 	}
 
 	return (
-		<div className="looping-gallery-filter" ref={filterRef}>
-			<a className="filter-item filter-item-all" href="#alle" >Alle</a>
-			{categories.map(category => (
-				<a href={`#${category.toLowerCase()}`} className={'filter-item filter-item-' + category.toLowerCase()} onClick={filterItem} key={category}>{category}</a>
-			))}
+		<div className="looping-gallery-filter-wrapper">
+			<div className="looping-gallery-filter" ref={filterRef}>
+				<a className="filter-item filter-item-all" href="#alle" >Alle</a>
+				{categories.map(category => (
+					<a href={`#${category.toLowerCase()}`} className={'filter-item filter-item-' + category.toLowerCase()} onClick={filterItem} key={category}>{category}</a>
+				))}
+			</div>
 		</div>
 	)
 };

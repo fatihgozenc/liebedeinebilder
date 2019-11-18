@@ -1,0 +1,12 @@
+.icon {
+	width: 24px;
+	height: 24px;
+	cursor: pointer;
+	fill: $nutGray;
+	transition: ease all .5s;
+
+	&:hover {
+		fill: $nutRed;
+		transition: ease all .5s;
+	}
+}

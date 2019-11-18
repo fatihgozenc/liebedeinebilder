@@ -1,22 +1,48 @@
-.looping-gallery-filter {
+.looping-gallery-filter-wrapper {
+	position: relative;
+	padding: 3% 0;
+	margin: 0 5%;
 	display: flex;
-	justify-content: center;
-	position: absolute;
-	bottom: -5%;
-	left: 0;
-	right: 0;
+	white-space: nowrap;
+	overflow: hidden;
 
-	@include md {
-		bottom: -8%;
+
+	&::before {
+		content: '';
+		background-image: linear-gradient(to right, $nutDark, rgba($nutDark, 0));
+		position: absolute;
+		height: 100%;
+		top: 0;
+		left: 0;
+		width: 25%;
+		z-index: 1;
 	}
 
+	&::after {
+		content: '';
+		background-image: linear-gradient(to left, $nutDark, rgba($nutDark, 0));
+		position: absolute;
+		height: 100%;
+		top: 0;
+		right: 0;
+		width: 25%;
+	}
+}
+
+.looping-gallery-filter {
+	overflow-x: scroll;
+	display: flex;
+	height: 10vh;
+
+	// justify-content: center;
 	a {
+		height: max-content;
 		cursor: pointer;
 		font-size: .9em;
 		font-weight: 500;
 		text-transform: uppercase;
 		transition: .3s all;
-		padding: 0 1em;
+		padding: 0 2em;
 		border-right: 1px solid $nutRed;
 
 		@include md {
@@ -30,7 +56,12 @@
 		}
 
 		&:first-child {
-			border-left: 1px solid $nutRed;
+			border-left: 0;
+			margin-left: 20%;
+		}
+
+		&:last-child {
+			padding-right: 35%;
 		}
 
 		&:hover {

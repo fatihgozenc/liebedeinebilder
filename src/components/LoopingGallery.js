@@ -4,6 +4,7 @@ const LoopingRow = React.lazy(() => import('./LoopingRow'));
 
 const LoopingGallery = ({ data }) => {
 
+	//FUNCTION FOR DISTRIBUTING DATA INTO EQUAL ROWS FROM GIVEN JSON.
 	const distributeImageData = (arr, rows) => {
 		const rowImgCount = Math.ceil((arr.length) / rows);
 		const emptyData = Array.from({ length: rows }, () => [0]);
@@ -18,12 +19,14 @@ const LoopingGallery = ({ data }) => {
 		})
 		return slicedData;
 	};
+
+	//I WANT 4 COLUMNS SO THIS NEEDS TO BE TYPED.
 	const loopingRowData = distributeImageData(data, 4);
-	// console.trace(LoopingRow)
+
 	return (
 		<div className="looping_gallery">
 			{loopingRowData.map((rowData, key) => (
-				<LoopingRow onLoad={console.log('row loaded')} key={key} number={key} data={rowData} />
+				<LoopingRow key={key} number={key} data={rowData} />
 			))}
 			<LoopingGalleryFilter data={data} />
 		</div>

@@ -38,6 +38,15 @@
 	.logo {
 		width: 150px;
 		height: 25px;
+
+		@include md {
+			width: 240px;
+			height: 60px;
+		}
+
+		@include xl {
+			height: 40px;
+		}
 	}
 
 }

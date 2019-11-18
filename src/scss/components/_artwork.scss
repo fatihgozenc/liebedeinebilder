@@ -2,6 +2,11 @@
 	display: flex;
 	flex-direction: column;
 	padding: 0 5%;
+	animation: fadeIn 1.6s;
+}
+
+.artwork_loader {
+
 }
 
 .artwork_group-wrapper {
@@ -11,17 +16,30 @@
 }
 
 .artwork_switcher {
-
 	top: 0;
 	position: absolute;
 	display: flex;
+
+	&::after {
+		content:"You've reached the end.\n←";
+		height: 100%;
+		font-size: 1rem;
+		text-transform: uppercase;
+		color: $nutRed;
+		letter-spacing: 2px;
+	}
 }
 
 .artwork_item {
+	text-transform: uppercase;
 	box-sizing: border-box;
-	border: 1px solid $nutRed;
+	padding: 0 3px;
+	// border: 1px solid $nutRed;
 	height: 70vh;
 	flex: 1 0 90vw;
+	text-align: center;
+	background-color: $nutDark;
+	// box-shadow: 0 11px 30px -6px darken($nutDark, 5%);
 }
 
 .artwork_img {
@@ -29,8 +47,22 @@
 	width: 100%;
 }
 
-.other_artwork_list {
+.artwork_title {
+	font-weight: 500;
+	font-size: .9em;
+	padding: 2rem 0;
+	color: $nutGray;
+	letter-spacing: 1.6px;
+}
 
+.artwork_categories {
+	color: $nutRed;
+	letter-spacing: 2.6px;
+	font-size: .7em;
+
+}
+
+.other_artwork_list {
 	will-change: transform;
 }
 
